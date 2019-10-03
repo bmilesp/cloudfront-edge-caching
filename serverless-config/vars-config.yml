@@ -1,4 +1,0 @@
-cloudfrontOrigin: awseb-e-2-AWSEBLoa-XOW0O9G4L8PO-1368956318.us-east-1.elb.amazonaws.com
-region: us-east-1
-viewerRequestPathPattern: '/api/stations/stations/list.json'
-originRequestPathPattern: '/api/stations/stations/list.json'
