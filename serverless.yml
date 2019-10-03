@@ -1,0 +1,35 @@
+service: static-site
+
+custom:
+   objectPrefix: '${self:service}-${self:provider.stage}'
+
+plugins:
+   - '@silvermine/serverless-plugin-cloudfront-lambda-edge'
+
+provider:
+  name: aws
+  runtime: go1.x
+  stage: production
+  profile: production
+  timeout: 300
+  role: "arn:aws:iam::643545105133:role/sportsengine-production-us-east-2-lambdaRole"
+  region: ${file(serverless-config/vars-config.yml):region}
+
+functions:
+   viewerRequestPostGetRewriteHandler:
+      name: '${self:custom.objectPrefix}-viewer-request'
+      handler: app/functions/ViewerRequestPostGetRewriteHandler.handler
+      memorySize: 128
+      timeout: 1
+      lambdaAtEdge:
+         origin: ${file(serverless-config/vars-config.yml):origin}
+         eventType: 'viewer-request'
+         pathPattern: ${file(serverless-config/vars-config.yml):viewerRequestPathPattern}
+   originRequestGetPostRewriteHandler:
+      name: '${self:custom.objectPrefix}-origin-request'
+      handler: app/functions/ViewerRequestGetPostRewriteHandler.handler
+      memorySize: 128
+      timeout: 1
+      lambdaAtEdge:
+         origin: ${file(serverless-config/vars-config.yml):origin}
+         pathPattern: ${file(serverless-config/vars-config.yml):originRequestPathPattern}

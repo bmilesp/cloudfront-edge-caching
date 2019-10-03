@@ -1,0 +1,5 @@
+service: cloudfront-edge-caching;
+cloudfrontOrigin: s3://bucketname.s3.amazonaws.com/files
+region: us-west-1
+viewerRequestPathPattern: '*'
+originRequestPathPattern: '*'
