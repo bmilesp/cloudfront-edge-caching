@@ -3,3 +3,6 @@ cloudfrontOrigin: s3://bucketname.s3.amazonaws.com/files
 region: us-west-1
 viewerRequestPathPattern: '*'
 originRequestPathPattern: '*'
+cnames:
+  - 'test.example.com'
+AcmCertificateArn : ''
